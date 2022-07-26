@@ -1,0 +1,29 @@
+.header{
+    padding: 13px 26px;
+    background: rgba(7, 13, 20, 0.35);
+    backdrop-filter: blur(50px);
+    width: 300px;
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
+   border-radius: 12px;
+   margin-top: 40px;
+}
+
+.list{
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+}
+.item{
+    margin-right: 40px;
+    
+}
+.item:last-child{
+    margin-right: 0;
+}
+
+.item a{
+    text-decoration: none;
+    color: #fff;
+}

@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import './App.css';
+import PageContext from './components/context/context';
+import FilmInformation from './components/FilmInformation/FilmInformation';
+import Header from './components/Header/Header';
+import RandomFilm from './components/RandomFilm/RandomFilm';
+import {FilmContextProvider} from './components/context/context'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+        <div className="App">
+        <FilmContextProvider>
+          <Header/>
+          <Routes>
+            <Route path='/films' element={<RandomFilm/>}/>
+            <Route path='/films/:id' element={<FilmInformation/>}/>
+            <Route path='/' element={<Navigate to='/films'/>}/>
+          </Routes>
+          </FilmContextProvider>
+        </div>
+      </BrowserRouter>
   );
 }
 
