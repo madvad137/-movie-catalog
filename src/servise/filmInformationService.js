@@ -6,7 +6,7 @@ export class FilmInformationService{
         const response = await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${filmId}/similars`,{
             headers : {
                 'accept': 'application/json',
-                'X-API-KEY': '836aaa97-230e-4646-895c-2da02500fcde',
+                'X-API-KEY': '596d72cf-8e61-420b-85b7-77ec24577eae',
              } 
         })
         return response.data
@@ -16,7 +16,7 @@ export class FilmInformationService{
         const response = await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${filmId}`,{
             headers : {
                 'accept': 'application/json',
-                'X-API-KEY': '836aaa97-230e-4646-895c-2da02500fcde',
+                'X-API-KEY': '596d72cf-8e61-420b-85b7-77ec24577eae',
              } 
         })
         return response.data

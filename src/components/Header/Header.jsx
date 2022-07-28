@@ -18,11 +18,9 @@ const Header = () =>{
                        <NavLink to='/films'>Главная</NavLink>
                     </li>
                     <li className={header.item}>
-                        <a href="">Каталог</a>
+                    <NavLink to='/search'>Поиск</NavLink>
                     </li>
-                    <li className={header.item}>
-                        <a href="">топ 250</a>
-                    </li>
+                    
                 </ul>
         </header>
     )

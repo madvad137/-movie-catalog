@@ -1,5 +1,5 @@
 .header{
-    padding: 13px 26px;
+    padding: 13px 0px;
     background: rgba(7, 13, 20, 0.35);
     backdrop-filter: blur(50px);
     width: 300px;
@@ -13,7 +13,7 @@
 .list{
     display: flex;
     list-style: none;
-    justify-content: space-between;
+    justify-content: center;
 }
 .item{
     margin-right: 40px;

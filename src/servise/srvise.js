@@ -6,7 +6,17 @@ export class Servise{
         const response = await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=${pageCount}`,{
             headers : {
                 'accept': 'application/json',
-                'X-API-KEY': '836aaa97-230e-4646-895c-2da02500fcde',
+                'X-API-KEY': '596d72cf-8e61-420b-85b7-77ec24577eae',
+             } 
+        })
+        return response.data
+    }
+
+    getFoundFilms = async (text) => {
+        const response = await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=ALL&keyword=${text}`,{
+            headers : {
+                'accept': 'application/json',
+                'X-API-KEY': '596d72cf-8e61-420b-85b7-77ec24577eae',
              } 
         })
         return response.data

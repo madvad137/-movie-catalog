@@ -70,3 +70,6 @@
     align-items: center;
     text-align: center;
 }
+.FilmCardLink{
+    text-decoration: none;
+}

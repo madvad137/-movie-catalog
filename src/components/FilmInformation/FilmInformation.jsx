@@ -21,6 +21,7 @@ const getFullInformationFilm = useCallback(async () => {
         const similar = await filmInformationService.getSimilarFilms(id)
         const info = await filmInformationService.getFilmInformation(id)
             await setFilmInfo({similar:similar.items, info}) 
+           
             console.log(similar.items)
     }
     catch (error){

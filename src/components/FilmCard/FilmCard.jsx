@@ -8,7 +8,7 @@ const FilmCard = (props) =>{
     let id =''+props.filmId
 
     return(
-        <NavLink to={'/films/'+id}>
+        <NavLink className={style.FilmCardLink} to={'/films/'+id}>
              <div className={style.filmCard}>
             <div className={(style.filmImage)}>
                 <img src={props.poster} alt="" />
