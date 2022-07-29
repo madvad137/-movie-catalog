@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import style from './SearchFilms.module.css'
 import { Servise } from "../../servise/srvise";
 import FilmCard from "../FilmCard/FilmCard";
@@ -8,10 +8,23 @@ const SearchFilms = () => {
     let inputElement = React.createRef();
     const servise = new Servise()
    let setFilmName = useCallback(async () => {
-        const data = await servise. getFoundFilms(inputElement.current.value)
-        setSearchFilm(data.items)
-        console.log(data)
+        try {
+         
+              const data = await servise.getFoundFilms(inputElement.current.value)
+             setSearchFilm({
+            items:data.items,
+            totalPages:data.totalPages
+            })
+        }
+        catch (error){
+            console.error(error)
+        }
+      
    })
+
+  useEffect(() =>{
+    setFilmName()
+  },[])
 
 
 return(
@@ -23,13 +36,15 @@ return(
             </div>
             <div className={style.searchFilms}>
                 {
-                    searchFilm && searchFilm.map((item) => {
+                    searchFilm && searchFilm.items.map((item) => {
                         return(
-                            <FilmCard filmName ={item.nameRu} filmId={item.kinopoiskId} key = {item.filmId} poster = {item.posterUrlPreview} rating={item.rating}></FilmCard>
+                            <FilmCard filmName ={item.nameRu} filmId={item.kinopoiskId} key = {item.kinopoiskId} poster = {item.posterUrlPreview} rating={item.rating}></FilmCard>
                         )
                     })
                 }
+                
             </div>
+            
         </div>
     </div>
 )
