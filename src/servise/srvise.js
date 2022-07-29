@@ -13,7 +13,7 @@ export class Servise{
     }
 
     getFoundFilms = async (text) => {
-        const response = await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=ALL&keyword=${text}`,{
+        const response = await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${text}`,{
             headers : {
                 'accept': 'application/json',
                 'X-API-KEY': '596d72cf-8e61-420b-85b7-77ec24577eae',

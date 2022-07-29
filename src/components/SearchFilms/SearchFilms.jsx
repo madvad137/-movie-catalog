@@ -5,14 +5,15 @@ import FilmCard from "../FilmCard/FilmCard";
 
 const SearchFilms = () => {
     const [searchFilm, setSearchFilm] = useState(null)
-    let inputElement = React.createRef();
+    const [page, setPage] = useState(1)
+    let inputElement = React.createRef()
     const servise = new Servise()
    let setFilmName = useCallback(async () => {
         try {
          
               const data = await servise.getFoundFilms(inputElement.current.value)
              setSearchFilm({
-            items:data.items,
+            items:data.films,
             totalPages:data.totalPages
             })
         }
@@ -32,19 +33,18 @@ return(
         <div className="container">
             <div className={style.searchSection}>
                 <input className={style.movieInput}  placeholder="Найти что-то на сайте" ref={inputElement}/>
-                <button className={style.movieBtn} onClick={setFilmName}>нажать</button>
+                <button className={style.movieBtn} onClick={setFilmName}>найти</button>
             </div>
             <div className={style.searchFilms}>
                 {
                     searchFilm && searchFilm.items.map((item) => {
                         return(
-                            <FilmCard filmName ={item.nameRu} filmId={item.kinopoiskId} key = {item.kinopoiskId} poster = {item.posterUrlPreview} rating={item.rating}></FilmCard>
+                            <FilmCard filmName ={item.nameRu} filmId={item.filmId} key = {item.filmId} poster = {item.posterUrlPreview} rating={item.rating}></FilmCard>
                         )
                     })
                 }
                 
-            </div>
-            
+            </div>   
         </div>
     </div>
 )
