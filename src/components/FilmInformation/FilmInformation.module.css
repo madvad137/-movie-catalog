@@ -4,6 +4,7 @@
 
 .filmInfo{
     display: flex;
+    margin-bottom: 30px;
 }
 
 .filmImage{
@@ -35,6 +36,8 @@
 .filmName{
     font-size: 50px;
     margin-bottom: 30px;
+    color: #fff;
+    text-align: center;
 }
 
 .descriptionItem{
