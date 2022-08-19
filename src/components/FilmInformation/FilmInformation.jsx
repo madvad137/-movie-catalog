@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { FilmInformationService } from "../../servise/filmInformationService";
 import style from './FilmInformation.module.css'
 import {Swiper, SwiperSlide} from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Navigation, Pagination} from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -13,25 +13,24 @@ import FilmCard from "../FilmCard/FilmCard";
 
 
 const FilmInformation = () =>{
-const [filmInfo, setFilmInfo] = useState(null)
-const {id} = useParams()
-const filmInformationService = new FilmInformationService()
-const getFullInformationFilm = useCallback(async () => {
-    try {
-        const similar = await filmInformationService.getSimilarFilms(id)
-        const info = await filmInformationService.getFilmInformation(id)
-            await setFilmInfo({similar:similar.items, info}) 
-           
-            console.log(similar.items)
-    }
-    catch (error){
-        console.error(error)
-    }   
-},[])
+    const [filmInfo, setFilmInfo] = useState(null)
+    const {id} = useParams()
+    const filmInformationService = new FilmInformationService()
 
-useEffect(() =>{
-    getFullInformationFilm()
-},[id])
+    const getFullInformationFilm = useCallback(async () => {
+        try {
+            const similar = await filmInformationService.getSimilarFilms(id)
+            const info = await filmInformationService.getFilmInformation(id)
+            await setFilmInfo({similar:similar.items, info}) 
+        }
+        catch (error){
+            console.error(error)
+        }   
+    },[filmInformationService, id])
+
+    useEffect(() =>{
+        getFullInformationFilm()
+    },[id])
         
 return(
     <div className={style.film}> 
@@ -54,26 +53,27 @@ return(
                     })}</div>
                 </div>
             </div>
-        {
-            filmInfo && (<div className={style.stills}>
-        <div className={style.filmName}>Похожие фильмы</div>
-        <Swiper
-        className="slider"
-            modules={[Navigation, Pagination]}
-            slidesPerView={4}
-            navigation>
             {
-                filmInfo &&  filmInfo.similar.map((item) =>{
-                    return(
-                        <SwiperSlide className='swiperItem'>
-                            <FilmCard filmName ={item.nameRu} filmId={item.filmId} key = {item.filmId} poster = {item.posterUrlPreview} rating={item.rating}/>
-                        </SwiperSlide>
-                    )
-                })
-            }
-        </Swiper>
-        </div> )
-        }
+            filmInfo &&  filmInfo.similar.length>0 && (
+            <div className={style.stills}>
+                <div className={style.filmName}>Похожие фильмы</div>
+                <Swiper
+                    className="slider"
+                    modules={[Navigation, Pagination]}
+                    slidesPerView={window.innerWidth< 768? 1: 3}
+                    navigation>
+                    {
+                        filmInfo &&  filmInfo.similar.map((item) =>{
+                            return(
+                                <SwiperSlide className='swiperItem'>
+                                    <FilmCard filmName ={item.nameRu} filmId={item.filmId.toString()} key = {item.filmId} poster = {item.posterUrlPreview} rating={item.rating}/>
+                                </SwiperSlide>
+                            )
+                        })
+                    }
+                </Swiper>
+            </div>
+            )}
         </div>
     </div>
 )
